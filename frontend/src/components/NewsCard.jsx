@@ -9,84 +9,68 @@ const isFavorite = (favorites, item) =>
 export default function NewsCard({ item }) {
   const dispatch = useDispatch();
   const favorites = useSelector((s) => s.favorites);
-  const isFaved = isFavorite(favorites, item);
+  const faved = isFavorite(favorites, item);
 
   const toggleFavorite = () => {
-    if (isFaved) dispatch(removeFavorite(item.link));
+    if (faved) dispatch(removeFavorite(item.link));
     else dispatch(addFavorite(item));
   };
 
   return (
-    <div
+    <article
       className="
         flex flex-col md:flex-row
-        border border-gray-200 dark:border-gray-900
         bg-white dark:bg-gray-900
-        text-gray-900 dark:text-gray-100
-        rounded-xl overflow-hidden shadow-lg
-        hover:shadow-xl transition-all duration-300
+        border border-gray-200 dark:border-gray-700
+        rounded-xl overflow-hidden shadow-sm hover:shadow-md
+        transition
       "
     >
-      {/* --- TEXT SIDE --- */}
       <div className="p-4 flex flex-col justify-between flex-1">
-        <div className="mb-3">
-          <h3
-            className="
-              text-xl font-bold leading-snug
-              text-gray-900 dark:text-gray-100
-              hover:text-blue-700 dark:hover:text-blue-400
-              transition-colors
-            "
-          >
-            <a href={item.link} target="_blank" rel="noopener noreferrer">
+        <div>
+          <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">
+            <Link
+              to={`/article/${encodeURIComponent(item.title || "article")}`}
+              state={{ article: item }}
+              className="hover:underline"
+            >
               {item.title}
-            </a>
+            </Link>
           </h3>
 
-          <p className="text-sm mt-2 text-gray-600 dark:text-gray-400 line-clamp-3">
+          <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-3">
             {item.description}
           </p>
         </div>
 
-        <div
-          className="
-            flex justify-between items-center pt-3
-            border-t border-gray-200 dark:border-gray-700
-          "
-        >
+        <div className="mt-4 flex items-center justify-between gap-3">
           <Link
-            to={`/article/${item.title.replace(/\s+/g, "-")}`}
+            to={`/article/${encodeURIComponent(item.title || "article")}`}
             state={{ article: item }}
-            className="
-              text-blue-600 dark:text-blue-400
-              font-medium text-sm hover:underline
-            "
+            className="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
           >
             Read Full Article →
           </Link>
 
-          {/* Favorite Button */}
           <button
             onClick={toggleFavorite}
             className={`
-              px-3 py-1 text-sm rounded-full font-semibold
-              transition duration-200 shadow-md
+              px-3 py-1 rounded-full text-sm font-semibold transition
               ${
-                isFaved
-                  ? "bg-red-500 text-white hover:bg-red-600"
-                  : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-yellow-400 dark:hover:bg-yellow-500"
+                faved
+                  ? "bg-red-500 text-white"
+                  : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-yellow-400"
               }
             `}
-            title={isFaved ? "Remove from Favorites" : "Add to Favorites"}
+            title={faved ? "Remove from favorites" : "Add to favorites"}
           >
-            {isFaved ? "★ Favorited" : "☆ Favorite"}
+            {faved ? "★ Favorited" : "☆ Favorite"}
           </button>
         </div>
       </div>
 
-      {/* --- IMAGE SIDE --- */}
-      {item.image_url && (
-        <div className="md:w-56 md:h-auto h-40 flex-shrink-0">
+      {item.image_url ? (
+        <div className="w-full md:w-56 h-44 md:h-auto flex-shrink-0">
           <img
             src={item.image_url}
             alt={item.title}
@@ -94,7 +78,7 @@ export default function NewsCard({ item }) {
             loading="lazy"
           />
         </div>
-      )}
-    </div>
+      ) : null}
+    </article>
   );
 }

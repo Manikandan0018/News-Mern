@@ -5,46 +5,25 @@ import NewsFeed from "../components/NewsFeed";
 
 export default function Home() {
   return (
-    <div
-      className="
-        flex 
-        bg-gray-50 dark:bg-gray-950 
-        min-h-[calc(100vh-68px)]
-        transition-colors duration-300
-      "
-    >
-      {/* Sidebar for Languages */}
-      <aside
-        className="
-          hidden lg:block w-64 
-          border-r border-gray-200 dark:border-gray-800
-          bg-white dark:bg-gray-900
-          sticky top-16 h-screen
-          transition-colors duration-300
-        "
-      >
-        <LanguageFilter />
-      </aside>
-
-      {/* Main Content */}
-      <main className="flex-1">
-        {/* TOP Category filter */}
+    <div className="min-h-[calc(100vh-68px)] bg-gray-50 dark:bg-gray-950 transition-colors">
+      <div className="max-w-5xl mx-auto px-3 sm:px-6">
         <CategoryFilter />
 
-        <div className="p-6">
-          <h2
-            className="
-              text-2xl font-extrabold 
-              text-gray-900 dark:text-gray-100 
-              mb-6 transition-colors
-            "
-          >
-            Top Headlines
-          </h2>
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-6 py-6">
+          <main>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-gray-100 mb-4">
+              Top Headlines
+            </h2>
+            <NewsFeed />
+          </main>
 
-          <NewsFeed />
+          <aside className="hidden lg:block">
+            <div className="sticky top-20">
+              <LanguageFilter />
+            </div>
+          </aside>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

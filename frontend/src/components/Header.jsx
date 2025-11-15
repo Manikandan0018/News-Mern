@@ -10,52 +10,49 @@ export default function Header() {
   return (
     <header
       className="
-        sticky top-0 z-10 p-4
+        sticky top-0 z-30 p-3 sm:p-4
         bg-white dark:bg-gray-900
         text-gray-900 dark:text-gray-100
-        shadow-md flex justify-between items-center gap-4
-        transition duration-300
+        shadow-sm flex flex-wrap items-center gap-3
+        justify-between
       "
     >
-      {/* Logo */}
-      <Link
-        to="/"
-        className="text-3xl font-extrabold tracking-tight text-blue-600 dark:text-blue-400"
-      >
-        MyNews Hub
-      </Link>
+      <div className="flex items-center gap-3 w-full sm:w-auto">
+        <Link
+          to="/"
+          className="text-2xl sm:text-3xl font-extrabold tracking-tight text-blue-600 dark:text-blue-400"
+        >
+          MyNews Hub
+        </Link>
+      </div>
 
-      {/* Search Bar */}
-      <div className="flex-1 max-w-xl mx-6">
+      <div className="flex-1 min-w-0 mx-0 sm:mx-6 w-full sm:w-auto">
         <input
+          onChange={(e) => dispatch(setQuery(e.target.value))}
+          placeholder="Search topics, sources, locations..."
           className="
             w-full px-4 py-2 rounded-full
             border border-gray-300 dark:border-gray-700
             bg-white dark:bg-gray-800
             text-gray-900 dark:text-gray-100
             placeholder-gray-500 dark:placeholder-gray-400
-            focus:ring-2 focus:ring-blue-500
-            transition duration-200
+            focus:ring-2 focus:ring-blue-500 outline-none
+            transition
           "
-          placeholder="Search for topics, sources, or locations..."
-          onChange={(e) => dispatch(setQuery(e.target.value))}
         />
       </div>
 
-      {/* Favorites Link */}
-      <Link
-        to="/favorites"
-        className="
-          text-gray-600 dark:text-gray-300
-          hover:text-red-500 dark:hover:text-red-400
-          font-semibold px-3 py-2 transition duration-150
-        "
-      >
-        ★ Favorites
-      </Link>
+      <div className="flex items-center gap-2">
+        <Link
+          to="/favorites"
+          className="hidden sm:inline-block text-gray-600 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 px-3 py-2 rounded-md transition"
+          aria-label="Favorites"
+        >
+          ★ Favorites
+        </Link>
 
-      {/* 🌙 NEW Dark Mode Toggle */}
-      <DarkModeToggle />
+        <DarkModeToggle />
+      </div>
     </header>
   );
 }
