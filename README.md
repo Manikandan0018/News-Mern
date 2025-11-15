@@ -89,26 +89,3 @@ dotenv
 
 API
 
-NewsData.io (Latest News API)
-
-📁 Project Structure
-News-Mern/
-│
-├── backend/
-│   ├── controllers/
-│   ├── routes/
-│   ├── server.js
-│   ├── package.json
-│   └── .env
-│
-└── frontend/
-    ├── src/
-    │   ├── api/
-    │   ├── components/
-    │   ├── pages/
-    │   ├── store/
-    │   ├── App.jsx
-    │   └── main.jsx
-    ├── index.html
-    ├── package.json
-    └── .env 
