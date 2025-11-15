@@ -10,7 +10,7 @@ This dashboard allows users to browse real-time news, search topics, filter cate
 
 🟢 Backend https://news-rpek.onrender.com
 
-👉 https://news-rpek.onrender.com/
+
 
 📂 GitHub Repository
 https://github.com/Manikandan0018/News-Mern
